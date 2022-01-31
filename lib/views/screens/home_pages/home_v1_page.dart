@@ -18,16 +18,11 @@ class HomePageV1 extends StatelessWidget {
       backgroundColor: Colors.red,
       appBar: appBarDeliveryTo(
         context,
-        () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const FilterPage(),
-            ),
-          );
-        },
+        
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        
         child: Column(
           children: [
             const PageViewBuilderWidget(),

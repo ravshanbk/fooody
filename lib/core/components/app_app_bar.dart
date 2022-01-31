@@ -7,7 +7,6 @@ import 'package:foodly/providers/app_bar_delivery_provider.dart';
 import 'package:provider/provider.dart';
 
 appBarView(BuildContext? context, String? text, String? text2) {
-
   SizeConfig().init(context!);
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,8 +32,9 @@ appBarView(BuildContext? context, String? text, String? text2) {
   );
 }
 
-appBarDeliveryTo(BuildContext context, Function func) {
-  
+appBarDeliveryTo(
+  BuildContext context,
+) {
   List<DropdownMenuItem<String>> _dropDownItems = List.generate(
     context.watch<AppBarDeliveryToProvider>().regions.length,
     (__) => DropdownMenuItem(
@@ -58,7 +58,7 @@ appBarDeliveryTo(BuildContext context, Function func) {
     actions: [
       TextButton(
         onPressed: () {
-          func();
+          debugPrint("Filter button bosildi");
         },
         child: Text(
           "Filter",
@@ -75,7 +75,6 @@ appBarDeliveryTo(BuildContext context, Function func) {
 
 Column _titlee(
     BuildContext context, List<DropdownMenuItem<String>> _dropDownItems) {
-      
   return Column(
     children: [
       Text(
