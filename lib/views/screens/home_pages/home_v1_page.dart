@@ -4,6 +4,7 @@ import 'package:foodly/core/constants/app_colors.dart';
 import 'package:foodly/providers/app_bar_delivery_provider.dart';
 import 'package:foodly/providers/page_view_provider.dart';
 import 'package:foodly/views/screens/filter_page.dart';
+import 'package:foodly/views/widgets/filter_button.dart';
 import 'package:foodly/views/widgets/page_view_builder_page.dart';
 import 'package:foodly/views/widgets/see_all_button_in_row_with_title.dart';
 import 'package:provider/provider.dart';
@@ -213,26 +214,8 @@ class HomePageV1 extends StatelessWidget {
       backgroundColor: Colors.white,
       elevation: 0,
       title: _titlee(context, _dropDownItems),
-      actions: [
-        TextButton(
-          onPressed: () {
-            print("sdfs");
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const FilterPage(),
-              ),
-            );
-          },
-          child: Text(
-            "Filter",
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w500,
-              fontSize: getW(16.0),
-            ),
-          ),
-        ),
+      actions: const [
+        FilterButton(),
       ],
     );
   }

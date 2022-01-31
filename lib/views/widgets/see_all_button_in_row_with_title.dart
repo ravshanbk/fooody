@@ -23,19 +23,15 @@ class SeeAllButtonInRowWithTitle extends StatelessWidget {
             onPressed: () {
               switch (title) {
                 case "Featured Partners":
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const FeaturedPartners(),
-                    ),
+                   "/featuredPartners"
                   );
                   break;
                 case "Best Picks\nRestaurant by team":
-                 Navigator.push(
+                 Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const SearchRestaurantPage(),
-                    ),
+                    "/searchRestaurantsPage"
                   );
                   break;
                 default:

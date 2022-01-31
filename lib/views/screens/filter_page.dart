@@ -27,18 +27,19 @@ class FilterPage extends StatelessWidget {
           _clearAllButtonWithTitle("PRICE RANGE", context),
           _priceRange(context),
           const Spacer(),
-          _applyButton(),
+          _applyButton(context),
           SizedBox(height: getH(30.0)),
         ],
       ),
     );
   }
 
-  ButtonGreenPrimearyColored _applyButton() {
+  ButtonGreenPrimearyColored _applyButton(BuildContext context) {
     return ButtonGreenPrimearyColored(
         onPressed: () {
           if (kDebugMode) {
-            print("object Get Started Bosildi");
+           Navigator.pushNamed(context, "/searchResults");
+            print("filter page dagi green button bosildi");
           }
         },
         title: "APPLY FILTERS");
