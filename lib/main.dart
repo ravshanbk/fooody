@@ -9,15 +9,9 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => PageViewProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => FilterProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => AppBarDeliveryToProvider(),
-        ),
+        ChangeNotifierProvider.value(value: PageViewProvider()),
+        ChangeNotifierProvider.value(value: FilterProvider()),
+        ChangeNotifierProvider.value(value: AppBarDeliveryToProvider()),
       ],
       child: const MyApp(),
     ),
