@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:foodly/core/components/app_app_bar.dart';
 import 'package:foodly/core/components/size_config.dart';
 import 'package:foodly/core/constants/app_colors.dart';
+import 'package:foodly/providers/app_bar_delivery_provider.dart';
 import 'package:foodly/providers/page_view_provider.dart';
 import 'package:foodly/views/screens/filter_page.dart';
 import 'package:foodly/views/widgets/page_view_builder_page.dart';
@@ -15,14 +15,9 @@ class HomePageV1 extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: Colors.red,
-      appBar: appBarDeliveryTo(
-        context,
-        
-      ),
+      appBar: appBarDeliveryTolocal(context),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        
         child: Column(
           children: [
             const PageViewBuilderWidget(),
@@ -45,19 +40,16 @@ class HomePageV1 extends StatelessWidget {
     );
   }
 
-  ListView _listOfAllRestaurants() {
+  _listOfAllRestaurants() {
     return ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (_, __) {
-              return Column(
-                children: [
-                  const PageViewBuilderWidget(),
-                  Text(__.toString())
-                ],
-              );
-            },
-          );
+      itemCount: 3,
+      scrollDirection: Axis.vertical,
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemBuilder: (_, __) {
+        return const PageViewBuilderWidget();
+      },
+    );
   }
 
   Ink _freeDeliveryFor1MonthBanner() {
@@ -77,7 +69,6 @@ class HomePageV1 extends StatelessWidget {
   }
 
   SizedBox _partnersImageBoxes(BuildContext context) {
-    
     return SizedBox(
       height: getH(254.0),
       child: ListView.separated(
@@ -181,9 +172,6 @@ class HomePageV1 extends StatelessWidget {
   }
 
   Ink _imageBox(BuildContext context, int __) {
-    
-    
-  
     return Ink(
       height: getH(160.0),
       width: getW(200.0),
@@ -197,6 +185,84 @@ class HomePageV1 extends StatelessWidget {
           getW(15.0),
         ),
       ),
+    );
+  }
+
+  ///////////////////////////////////////////////////////////////
+
+  appBarDeliveryTolocal(
+    BuildContext context,
+  ) {
+    List<DropdownMenuItem<String>> _dropDownItems = List.generate(
+      context.watch<AppBarDeliveryToProvider>().regions.length,
+      (__) => DropdownMenuItem(
+        value: context.watch<AppBarDeliveryToProvider>().regions[__],
+        child: Text(
+          context.watch<AppBarDeliveryToProvider>().regions[__],
+          style: TextStyle(
+            fontSize: getW(22.0),
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+    );
+
+    return AppBar(
+      centerTitle: true,
+      toolbarHeight: getH(90.0),
+      backgroundColor: Colors.white,
+      elevation: 0,
+      title: _titlee(context, _dropDownItems),
+      actions: [
+        TextButton(
+          onPressed: () {
+            print("sdfs");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const FilterPage(),
+              ),
+            );
+          },
+          child: Text(
+            "Filter",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: getW(16.0),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Column _titlee(
+      BuildContext context, List<DropdownMenuItem<String>> _dropDownItems) {
+    return Column(
+      children: [
+        Text(
+          "DELIVERY",
+          style: TextStyle(
+            color: AppColors.greenColor,
+            fontSize: getW(12.0),
+          ),
+        ),
+        DropdownButton<String>(
+          icon: Icon(
+            Icons.expand_more,
+            size: getW(28.0),
+          ),
+          underline: Ink(
+            color: Colors.white,
+          ),
+          value: context.watch<AppBarDeliveryToProvider>().value,
+          items: _dropDownItems,
+          onChanged: (v) {
+            context.read<AppBarDeliveryToProvider>().valueChanger(v!);
+          },
+        ),
+      ],
     );
   }
 }

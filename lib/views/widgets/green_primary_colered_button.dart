@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:foodly/core/components/size_config.dart';
 import 'package:foodly/core/constants/app_colors.dart';
@@ -15,6 +16,9 @@ class ButtonGreenPrimearyColored extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
+        if (kDebugMode) {
+          print("Green button bosildi");
+        }
         onPressed();
       },
       style: ElevatedButton.styleFrom(

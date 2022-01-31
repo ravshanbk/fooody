@@ -6,7 +6,7 @@ class RouteManager {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => const HomePageV1());
-      case '/home':
+      case '/filter':
         return MaterialPageRoute(builder: (_) => const HomePageV1());
       case '/search':
         return MaterialPageRoute(builder: (_) => const HomePageV1());

@@ -16,6 +16,7 @@ class PageViewBuilderWidget extends StatelessWidget {
     SizeConfig().init(context);
     return SizedBox(
     height: getH(326.0),
+    width: getW(375.0),
     child: PageView.builder(
       onPageChanged: (v) {
         context.read<PageViewProvider>().currentPageChanger(v);

@@ -11,29 +11,25 @@ class FilterPageWrapWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> _children = List.generate(
       data.categories.length,
-      (index) => ElevatedButton(
-        onPressed: () {
-          data.func(index);
-        },
-        style: ElevatedButton.styleFrom(
-          minimumSize: Size(getW(80.0), getH(38.0)),
-          padding: EdgeInsets.symmetric(
-            horizontal: getW(20.0),
-          ),
-          primary: data.selectedCategories[index]
-              ? AppColors.greenColor
-              : AppColors.inputFillColor,
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            side: BorderSide.none,
-            borderRadius: BorderRadius.circular(
-              getW(10.0),
-            ),
+      (index) => Chip(
+        elevation: 0,
+        backgroundColor: data.selectedCategories[index]
+            ? AppColors.greenColor
+            : AppColors.inputFillColor,
+        deleteIconColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            getW(10.0),
           ),
         ),
-        child: Text(
+       
+        onDeleted: () {
+          data.func(index);
+        },
+        label: Text(
           data.categories[index],
           style: TextStyle(
+            fontWeight: FontWeight.w600,
             fontSize: getW(12.0),
             color: data.selectedCategories[index]
                 ? Colors.white
@@ -45,6 +41,10 @@ class FilterPageWrapWidget extends StatelessWidget {
 
     SizeConfig().init(context);
     return Wrap(
+      clipBehavior: Clip.hardEdge,
+      runSpacing: 0.0,
+      alignment: WrapAlignment.start,
+      runAlignment: WrapAlignment.start,
       spacing: getW(12.0),
       children: _children,
       crossAxisAlignment: WrapCrossAlignment.start,

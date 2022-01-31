@@ -27,17 +27,21 @@ class FilterPage extends StatelessWidget {
           _clearAllButtonWithTitle("PRICE RANGE", context),
           _priceRange(context),
           const Spacer(),
-          ButtonGreenPrimearyColored(
-              onPressed: () {
-                if (kDebugMode) {
-                  print("object Get Started Bosildi");
-                }
-              },
-              title: "APPLY FILTERS"),
+          _applyButton(),
           SizedBox(height: getH(30.0)),
         ],
       ),
     );
+  }
+
+  ButtonGreenPrimearyColored _applyButton() {
+    return ButtonGreenPrimearyColored(
+        onPressed: () {
+          if (kDebugMode) {
+            print("object Get Started Bosildi");
+          }
+        },
+        title: "APPLY FILTERS");
   }
 
   SizedBox _priceRange(BuildContext context) {
