@@ -34,14 +34,14 @@ class HomePageV1 extends StatelessWidget {
             _partnersImageBoxes(context),
             SizedBox(height: getH(34.0)),
             const SeeAllButtonInRowWithTitle("All Restaurants"),
-            _listOfAllRestaurants(),
+            _listOfAllRestaurants(context),
           ],
         ),
       ),
     );
   }
 
-  _listOfAllRestaurants() {
+  _listOfAllRestaurants(BuildContext context) {
     return ListView.builder(
       itemCount: 3,
       scrollDirection: Axis.vertical,

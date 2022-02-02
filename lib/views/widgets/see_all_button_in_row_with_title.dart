@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodly/core/components/size_config.dart';
 import 'package:foodly/core/constants/app_colors.dart';
-import 'package:foodly/views/screens/featured_partners_page.dart';
-import 'package:foodly/views/screens/search_restaurant_page.dart';
 
 class SeeAllButtonInRowWithTitle extends StatelessWidget {
   final String title;
@@ -32,6 +30,12 @@ class SeeAllButtonInRowWithTitle extends StatelessWidget {
                  Navigator.pushNamed(
                     context,
                     "/searchRestaurantsPage"
+                  );
+                  break;
+                   case "All Restaurants":
+                 Navigator.pushNamed(
+                    context,
+                   "/home3"
                   );
                   break;
                 default:

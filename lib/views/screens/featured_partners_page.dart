@@ -11,7 +11,11 @@ class FeaturedPartners extends StatelessWidget {
     return Scaffold(
       appBar: _appBar(context),
       body: ListView.builder(itemBuilder: (_, __) {
-        return const PageViewBuilderWidget();
+        return InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, "/singleRestaurant");
+            },
+            child: const PageViewBuilderWidget());
       }),
     );
   }
