@@ -17,7 +17,7 @@ class ButtonGreenPrimearyColored extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         if (kDebugMode) {
-          print("Green button bosildi");
+          print("Green $title button bosildi");
         }
         onPressed();
       },

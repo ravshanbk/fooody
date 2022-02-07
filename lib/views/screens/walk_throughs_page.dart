@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodly/core/components/size_config.dart';
+import 'package:foodly/providers/authProviders/sign_in_sign_up_provider.dart';
 import 'package:foodly/providers/walk_throughs_provider.dart';
 import 'package:foodly/views/widgets/green_primary_colered_button.dart';
 import 'package:foodly/views/widgets/walk_throughs_child_widget.dart';
@@ -52,8 +53,15 @@ class WalkThroughs extends StatelessWidget {
   _getStartedButton(BuildContext context) {
     return ButtonGreenPrimearyColored(
       onPressed: () {
-        debugPrint("jjjjjjjjj");
-        Navigator.pushNamed(context, "/signIn");
+        context.read<SignInSignUpProvider>().tokenIsExpired().then(
+          (value) {
+            if (value) {
+              Navigator.pushNamed(context, "/signUp");
+            } else {
+              Navigator.pushNamed(context, "/bodyPage");
+            }
+          },
+        );
       },
       title: "GET STARTED",
     );

@@ -12,5 +12,6 @@ class AppColors{
   static Color deepBlueColor = const Color(0xff395998);
   static Color inputFillColor = const Color(0xffF0F0F0);
   static Color orangeAccentColor = const Color(0xffEF9920).withOpacity(.4);
+  static Color sharpGreyColor = const Color(0xff010F07).withOpacity(.4);
   
 }

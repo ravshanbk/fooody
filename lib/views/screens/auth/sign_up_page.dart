@@ -5,6 +5,7 @@ import 'package:foodly/core/components/input_decoration.dart';
 import 'package:foodly/core/components/sign_in_sign_up_page_app_bar.dart';
 import 'package:foodly/core/components/size_config.dart';
 import 'package:foodly/core/constants/app_colors.dart';
+import 'package:foodly/services/sign_up_service.dart';
 import 'package:foodly/views/widgets/buttons/with_connect_button.dart';
 import 'package:foodly/views/widgets/green_primary_colered_button.dart';
 import 'package:foodly/views/widgets/what_todo_info_widget.dart';
@@ -34,7 +35,7 @@ class SignUpPage extends StatelessWidget {
             SizedBox(height: getH(34.0)),
             _inputFields(),
             SizedBox(height: getH(24.0)),
-            _signUpButton(),
+            _signUpButton(context),
             SizedBox(height: getH(24.0)),
             _orButtonAndTerms(),
             SizedBox(height: getH(24.0)),
@@ -75,12 +76,41 @@ class SignUpPage extends StatelessWidget {
   ButtonGreenPrimearyColored _signUpButton(BuildContext context) {
     return ButtonGreenPrimearyColored(
         onPressed: () {
-          if (kDebugMode) {
-            print("SignUp Button Bosildi");
-          }
+          if (_formkey.currentState!.validate()) {
+            ServiceAuth()
+                .signUpUserService(
+              userName: _fullNameController.text,
+              email: _emailController.text,
+              password: _passwordController.text,
+            )
+                .then((success) {
+              if (success) {
+                showSnackBar(
+                  "You Are Successfully Signed Up",
+                  context,
+                  AppColors.greenColor,
+                );
+                Navigator.pushNamed(context, "/bodyPage");
+              } else {
+                showSnackBar(
+                  "Failed! Please, Retry!",
+                  context,
+                  Colors.red,
+                );
+              }
+            });
 
-          if(_formkey.currentState!.validate()){
-          
+            //   context
+            //       .watch<SignInSignUpProvider>()
+            //       .signInUserService(
+            //           _emailController.text, _passwordController.text)
+            //       .then((success) {
+            //     if (success) {
+            //       Navigator.pushNamed(context, "/home");
+            //     } else {
+            //       _showSnackBar("Parol yoki email notog'ri", context);
+            //     }
+            //   });
           }
         },
         title: "SIGN UP");
@@ -155,6 +185,16 @@ class SignUpPage extends StatelessWidget {
       onPressed: () {
         Navigator.pushNamed(context, "/signIn");
       },
+    );
+  }
+
+  static showSnackBar(String message, BuildContext context, Color color) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: color,
+        behavior: SnackBarBehavior.floating,
+        content: Text(message),
+      ),
     );
   }
 }

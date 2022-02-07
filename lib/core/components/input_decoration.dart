@@ -7,6 +7,10 @@ inputDecorationMy({
   Widget? suffixIcon,
 }) {
   return InputDecoration(
+    hintStyle: TextStyle(
+      color: AppColors.greyColor,
+    ),
+    hintText: hintText,
     suffixIcon: suffixIcon ??
         const SizedBox(
           height: 0,

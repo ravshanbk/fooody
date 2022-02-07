@@ -10,10 +10,10 @@ class BottonNavBarCubit extends Cubit<BottonNavBarState> {
   BottonNavBarCubit() : super(BottonNavBarInitial());
 
   List pages = [
-   const HomePageV1(),
+    HomePageV1(),
    const SearchRestaurantPage(),
-  const HomePageV1(),
-  const  HomePageV1(),
+   HomePageV1(),
+  HomePageV1(),
   ];
   changePage(int tappedIndex) {
     pageIndex = tappedIndex;

@@ -49,7 +49,7 @@ class WithConnectButton extends StatelessWidget {
             ),
           ),
           Text(
-            "CONNECT WITH" + (isFacebook ? "FACEBOOK" : "GOOGLE"),
+            "CONNECT WITH" + (isFacebook ? " FACEBOOK" : "   GOOGLE"),
             style: TextStyle(
               fontSize: getW(12.0),
             ),

@@ -93,6 +93,7 @@ class WhatToDoInfoPage extends StatelessWidget {
       title,
       textAlign: TextAlign.center,
       style: TextStyle(
+        fontWeight: FontWeight.w600,
         color: Colors.black,
         fontSize: getW(isCentered != null ? 21.0 : 34.0),
       ),

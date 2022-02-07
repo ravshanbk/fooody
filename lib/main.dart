@@ -3,12 +3,14 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:foodly/providers/app_bar_delivery_provider.dart';
 import 'package:foodly/providers/authProviders/phone_number_provider.dart';
 import 'package:foodly/providers/authProviders/sign_in_sign_up_provider.dart';
+import 'package:foodly/providers/bottom_navigation_bar_provider.dart/bottom_navigation_bar_provider.dart';
 import 'package:foodly/providers/cookieProviders/bottom_cookie_provider.dart';
 import 'package:foodly/providers/cookieProviders/top_cookie_provider.dart';
 import 'package:foodly/providers/cookie_provider.dart';
 import 'package:foodly/providers/filter_provider.dart';
 import 'package:foodly/providers/meal_type_provider.dart';
 import 'package:foodly/providers/page_view_provider.dart';
+import 'package:foodly/providers/settingsProvider.dart';
 import 'package:foodly/providers/type_of_foods_provider.dart';
 import 'package:foodly/providers/walk_throughs_provider.dart';
 import 'package:foodly/routes.dart';
@@ -32,6 +34,8 @@ void main() async {
         ChangeNotifierProvider.value(value: WalkThroughPageProvider()),
         ChangeNotifierProvider.value(value: LoginByPhoneNumberProvider()),
         ChangeNotifierProvider.value(value: SignInSignUpProvider()),
+        ChangeNotifierProvider.value(value: BottomNavigationBarProvider()),
+        ChangeNotifierProvider.value(value: SettingsProvider()),
       ],
       child: const MyApp(),
     ),

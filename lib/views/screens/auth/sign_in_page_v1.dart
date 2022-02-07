@@ -4,12 +4,11 @@ import 'package:foodly/core/components/input_decoration.dart';
 import 'package:foodly/core/components/sign_in_sign_up_page_app_bar.dart';
 import 'package:foodly/core/components/size_config.dart';
 import 'package:foodly/core/constants/app_colors.dart';
-import 'package:foodly/providers/authProviders/sign_in_sign_up_provider.dart';
+import 'package:foodly/services/sign_up_service.dart';
 import 'package:foodly/views/screens/auth/sign_up_page.dart';
 import 'package:foodly/views/widgets/buttons/with_connect_button.dart';
 import 'package:foodly/views/widgets/green_primary_colered_button.dart';
 import 'package:foodly/views/widgets/what_todo_info_widget.dart';
-import 'package:provider/provider.dart';
 
 class SignInPageV1 extends StatelessWidget {
   SignInPageV1({Key? key}) : super(key: key);
@@ -59,7 +58,29 @@ class SignInPageV1 extends StatelessWidget {
       onPressed: () {
         debugPrint("Sign In OnPresed Pressed");
         if (formKey.currentState!.validate()) {
-          context.read<SignInSignUpProvider>().signInUser("", "password");
+          ServiceAuth()
+              .signInUserService(
+            email: _emailController.text,
+            password: _passwordController.text,
+          )
+              .then((bool value) {
+            if (value) {
+              SignUpPage.showSnackBar(
+                  "You are signed in !", context, Colors.green);
+
+              Navigator.pushNamedAndRemoveUntil(
+                  context, "/bodyPage", (route) => false);
+            } else {
+              SignUpPage.showSnackBar(
+                "Your token expired!\n Please re-register",
+                context,
+                Colors.green,
+              );
+
+              Navigator.pushNamedAndRemoveUntil(
+                  context, "/signUp", (route) => false);
+            }
+          });
         }
       },
       title: 'SIGN IN',
@@ -71,29 +92,37 @@ class SignInPageV1 extends StatelessWidget {
       key: formKey,
       child: Column(
         children: [
-          TextFormField(
-            validator: (v) {
-              if (v!.isEmpty) {
-                return "REQUIRED";
-              }
-            },
-            controller: _emailController,
-            decoration: inputDecorationMy(
-              suffixIcon: _suffixIconPhone(),
+          SizedBox(
+            height: getH(54.0),
+            child: TextFormField(
+              validator: (v) {
+                if (v!.isEmpty) {
+                  return "REQUIRED";
+                }
+              },
+              controller: _emailController,
+              decoration: inputDecorationMy(
+                hintText: "Email",
+                suffixIcon: _suffixIconPhone(),
+              ),
             ),
           ),
           SizedBox(
             height: getH(20.0),
           ),
-          TextFormField(
-            validator: (v) {
-              if (v!.isEmpty) {
-                return "REQUIRED";
-              }
-            },
-            controller: _passwordController,
-            decoration: inputDecorationMy(
-              suffixIcon: _suffixIconInvisible(),
+          SizedBox(
+            height: getH(54.0),
+            child: TextFormField(
+              validator: (v) {
+                if (v!.isEmpty) {
+                  return "REQUIRED";
+                }
+              },
+              controller: _passwordController,
+              decoration: inputDecorationMy(
+                hintText: "Password",
+                suffixIcon: _suffixIconInvisible(),
+              ),
             ),
           ),
         ],
@@ -104,7 +133,8 @@ class SignInPageV1 extends StatelessWidget {
   WhatToDoInfoPage _whatToDo(BuildContext context) {
     return WhatToDoInfoPage(
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpPage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SignUpPage()));
       },
       title: "Welcome to",
       subTitle: "Enter Your Phone number or Email",
@@ -117,13 +147,26 @@ class SignInPageV1 extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          "Or",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: getW(16.0),
+        SizedBox(
+            width: getW(100.0),
+            child: Divider(
+              thickness: getW(1.5),
+            )),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: getW(20.0)),
+          child: Text(
+            "Or",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: getW(16.0),
+            ),
           ),
         ),
+        SizedBox(
+            width: getW(100.0),
+            child: Divider(
+              thickness: getW(1.5),
+            )),
       ],
     );
   }

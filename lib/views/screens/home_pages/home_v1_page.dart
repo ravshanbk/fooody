@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:foodly/core/components/app_app_bar.dart';
 import 'package:foodly/core/components/size_config.dart';
 import 'package:foodly/core/constants/app_colors.dart';
-import 'package:foodly/providers/app_bar_delivery_provider.dart';
 import 'package:foodly/providers/page_view_provider.dart';
-import 'package:foodly/views/screens/filter_page.dart';
-import 'package:foodly/views/widgets/filter_button.dart';
 import 'package:foodly/views/widgets/page_view_builder_page.dart';
 import 'package:foodly/views/widgets/see_all_button_in_row_with_title.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +14,7 @@ class HomePageV1 extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      appBar: appBarDeliveryTolocal(context),
+      appBar: appBarDeliveryTo(context),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -186,66 +184,6 @@ class HomePageV1 extends StatelessWidget {
           getW(15.0),
         ),
       ),
-    );
-  }
-
-  ///////////////////////////////////////////////////////////////
-
-  appBarDeliveryTolocal(
-    BuildContext context,
-  ) {
-    List<DropdownMenuItem<String>> _dropDownItems = List.generate(
-      context.watch<AppBarDeliveryToProvider>().regions.length,
-      (__) => DropdownMenuItem(
-        value: context.watch<AppBarDeliveryToProvider>().regions[__],
-        child: Text(
-          context.watch<AppBarDeliveryToProvider>().regions[__],
-          style: TextStyle(
-            fontSize: getW(22.0),
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-    );
-
-    return AppBar(
-      centerTitle: true,
-      toolbarHeight: getH(90.0),
-      backgroundColor: Colors.white,
-      elevation: 0,
-      title: _titlee(context, _dropDownItems),
-      actions: const [
-        FilterButton(),
-      ],
-    );
-  }
-
-  Column _titlee(
-      BuildContext context, List<DropdownMenuItem<String>> _dropDownItems) {
-    return Column(
-      children: [
-        Text(
-          "DELIVERY",
-          style: TextStyle(
-            color: AppColors.greenColor,
-            fontSize: getW(12.0),
-          ),
-        ),
-        DropdownButton<String>(
-          icon: Icon(
-            Icons.expand_more,
-            size: getW(28.0),
-          ),
-          underline: Ink(
-            color: Colors.white,
-          ),
-          value: context.watch<AppBarDeliveryToProvider>().value,
-          items: _dropDownItems,
-          onChanged: (v) {
-            context.read<AppBarDeliveryToProvider>().valueChanger(v!);
-          },
-        ),
-      ],
     );
   }
 }
